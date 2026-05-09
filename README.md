@@ -50,7 +50,7 @@ Prioridade na proteção de dados de menores, com termo de aceite obrigatório.
 ## Conteúdo do Repositório
 
 - [Proposta Técnica e Comercial Detalhada](proposta.md)
-- [Guia de Vibe Coding (PWA)](guide.md)
+- [Guia de Vibe Coding (PWA)](guia.md)
 
 ## Como Contribuir
 
