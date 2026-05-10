@@ -135,7 +135,12 @@ O sistema deve: promover evolução pessoal, estimular disciplina e responsabili
 
 ## skill sugerida
 
-`mobile-app` com foco em PWA gamificado completo
+**`mobile-app`** — iPhone 15 Pro / Pixel framed app screen(s)
+
+> Para criar múltiplas telas, use o prompt em partes (Home, depois Diário, etc.) 
+> OU peça todos os frames de uma vez no mesmo prompt.
+
+**Alternativa**: `gamified-app` — Three-frame gamified mobile prototype (para preview rápido de 3 telas)
 
 ## direção visual
 
@@ -348,7 +353,28 @@ O sistema deve: promover evolução pessoal, estimular disciplina e responsabili
 - **Level up**: confetti burst + modal scale
 - **Toast**: slide up from bottom, 300ms
 
-## prompt final para o open-design
+## ⚙️ MODALIDADE DE PROJETO: LIVE PROJECT
+
+**CRÍTICO**: Este é um projeto em modo **LIVE** (prototipagem contínua).
+
+### Como funciona:
+1. Copie o **prompt final** abaixo e cole no [open-designer](https://opendesigner.io/)
+2. Selecione a skill: **`mobile-app`** (iPhone framed mobile prototype)
+3. O agente vai gerar HTML + CSS auto-contido com preview em tempo real
+4. Após cada tela ficar boa, salve o código (botão "Save to disk")
+5. Repita para cada tela do app
+6. Ao final, terão múltiplos arquivos HTML prontos para implementação
+
+### Output esperado:
+- **Arquivos**: `index.html` (auto-contido com CSS inline)
+- **Formato**: HTML/CSS puro — pode ser aberto diretamente no browser
+- **Preview**: iframe do iPhone 15 Pro frame no open-designer
+- **Export**: HTML / PDF / ZIP
+
+### Próximos passos após gerar no open-designer:
+1. Coletar todos os HTMLs gerados
+2. Migrar para componentes React/Tailwind no projeto real
+3. Integrar com Supabase e lógica de estado
 
 ---
 
