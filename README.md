@@ -1,61 +1,82 @@
-# INCONFORMADOS
+# 🔥 INCONFORMADOS
 
-## Descrição do Projeto
+> Ecossistema digital de transformação social e formação humana para jovens.
 
-O **INCONFORMADOS** é uma plataforma digital completa projetada para conectar, acompanhar e gerar impacto social positivo entre jovens da comunidade e escola em Salvador. Trata-se de uma rede social gamificada com painel administrativo, inteligência artificial integrada e gestão segura de usuários, dimensionada para suportar até 500 jovens ativos.
+## 📱 Sobre
 
-## Estratégia de Plataforma
+Plataforma gamificada de evolução pessoal, desenvolvimento e engajamento comunitário voltada para jovens de 12-18 anos em Salvador.
 
-- **PWA (Progressive Web App)**: Acesso direto via link, funcionando como app nativo em qualquer dispositivo móvel.
-- **Vantagens**:
-  - Democrático: Funciona em qualquer celular (Android ou iPhone).
-  - Sem barreiras: Acesso via link direto.
-  - Transparente: Desenvolvimento acompanhável em tempo real.
+O aplicativo funciona como:
+- 🔥 Plataforma de evolução pessoal
+- 🔥 Rede social positiva
+- 🔥 Sistema de gamificação (XP, níveis, streak, medalhas)
+- 🔥 Ferramenta de acompanhamento comportamental
+- 🔥 Ambiente educacional e comunitário
+- 🔥 Diário de evolução com 4 blocos metodológicos
+- 🔥 IA inteligente de acompanhamento e moderação
 
-## Arquitetura e Tecnologias
+## 🎯 Funcionalidades
 
-- **Front-end**: Tecnologias modernas para interface gamificada e amigável.
-- **Back-end**: Supabase (PostgreSQL) para perfis, XP, diários e chats em tempo real.
-- **IA**: Moderação de ambiente e acompanhamento comportamental básico.
-- **Hospedagem**: Nuvem otimizada para alta disponibilidade e segurança.
+| Módulo | Features |
+|--------|----------|
+| **Área do Usuário** | Home com gamificação, perfil completo, dashboard de evolução, linha do tempo |
+| **Sistema de Gamificação** | XP, 6 níveis (Despertar → Voz da Geração), streak, desafios, medalhas |
+| **Sistema Social** | Feed comunitário, comunidades, chat monitorado por IA |
+| **Sistema "Levante Um"** | Convite de amigos, XP passivo, perfil de impacto |
+| **Diário do Inconformado** | 4 blocos: Consciência, Confronto, Ajuste, Meta |
+| **Missões** | Diárias e mensais, com recompensas de XP |
+| **IA Inteligente** | Moderação de conteúdo, acompanhamento comportamental, mensagens motivacionais |
+| **Painel Admin** | 4 perfis (Super Admin, Líder, Escola, Coordenador), dashboard, relatórios |
+| **Relatórios** | Individual e coletivo, tendências, alertas |
+| **Segurança** | LGPD, consentimento, proteção de menores |
 
-## Ciclo de Lançamento (3 Meses)
+## 🏗️ Stack Técnica
 
-### Mês 1: Estruturação e Base
-- **v0.1**: Configuração nuvem, BD e segurança.
-- **v0.2**: Cadastro, Login e Perfil.
-- **v0.3**: Dashboard Pessoal (Nível, XP, Streak).
-- **v0.4**: Diário do Inconformado.
+- **Frontend**: React + Vite + TypeScript + Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Auth, Realtime, Edge Functions)
+- **IA**: OpenAI API (moderação + análise comportamental)
+- **Hospedagem**: Vercel (frontend) + Supabase Cloud
+- **Formato**: PWA (Progressive Web App) - mobile-first
 
-### Mês 2: Comunidade e Gamificação
-- **v0.5**: Níveis e XP.
-- **v0.6**: Missões e Medalhas.
-- **v0.7**: Feed Social.
-- **v0.8**: Painel Admin Básico.
+## 📁 Estrutura do Repo
 
-### Mês 3: IA, Refinamento e Lançamento
-- **v0.9**: Integração IA.
-- **v1.0**: Lançamento Oficial.
+```
+INCONFORMADOS/
+├── opendesigner.md    # 🎨 Prompt master para open-design (design system + componentes)
+├── guia.md            # 📖 Guia completo de vibe coding (setup, build, mock data, schema)
+├── proposta.md        # 📝 Proposta técnica e comercial
+└── README.md          # 📄 Este arquivo
+```
 
-## Custos
+## 🚀 Começando
 
-- **Desenvolvimento**: R$ 2.800,00 (prazo: 3 meses).
-  - Condições: 40% entrada, 30% mês 2, 30% final.
-- **Manutenção Mensal**: R$ 300,00 (pós-lançamento, cobre hospedagem, IA e suporte).
+1. Leia o `opendesigner.md` e cole o prompt no [open-design](https://github.com/nexu-io/open-design)
+2. Iterate o design até满意
+3. Siga o `guia.md` para criar o projeto
 
-## Segurança e LGPD
+```bash
+# Setup inicial
+bun create vite inconformados --template react-ts
+cd inconformados
+bun add tailwindcss @tailwindcss/vite lucide-react
+```
 
-Prioridade na proteção de dados de menores, com termo de aceite obrigatório.
+## 📅 Roadmap
 
-## Conteúdo do Repositório
+| Fase | Descrição | Status |
+|------|-----------|--------|
+| **MVP** | Cadastro, Gamificação, Diário, Feed, Admin básico, IA básica | 🚧 Em progresso |
+| **v2** | Chat, Comunidades, Modo Escola, Relatórios avançados, IA emocional | 📋 Planejado |
 
-- [Proposta Técnica e Comercial Detalhada](proposta.md)
-- [Guia de Vibe Coding (PWA)](guia.md)
+## 💰 Investimento
 
-## Como Contribuir
+- **Desenvolvimento**: R$ 2.800,00 (3 meses)
+- **Manutenção mensal**: R$ 300,00 (hospedagem + suporte + IA)
 
-Este repositório serve como documentação inicial. Para desenvolvimento, siga o guia de vibe coding.
+## 🔗 Links Úteis
 
-## Contato
-
-Para dúvidas ou parcerias, entre em contato com o desenvolvedor responsável.
+- [open-design](https://github.com/nexu-io/open-design)
+- [Supabase](https://supabase.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [lucide-react](https://lucide.dev/)
+- [Vite PWA](https://vite-pwa.latuvi.com/)
