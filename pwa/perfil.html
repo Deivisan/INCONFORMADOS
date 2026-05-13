@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inconformados - Perfil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-hover: #1F1F1F;
+      --primary: #10B981;
+      --secondary: #8B5CF6;
+      --accent: #F59E0B;
+      --warning: #EF4444;
+      --text: #FAFAFA;
+      --text-muted: #A1A1AA;
+      --border: #27272A;
+      --radius: 16px;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: linear-gradient(180deg, #111 0%, #000 100%);
+      border-radius: 56px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 30px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px 6px;
+      font: 600 14px/1 var(--sans);
+      color: var(--text);
+    }
+    
+    /* Header */
+    .profile-header {
+      padding: 16px 22px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .header-title {
+      font: 700 18px/1 var(--sans);
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* Profile Card */
+    .profile-card {
+      padding: 20px 22px;
+      text-align: center;
+    }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 12px;
+      display: grid;
+      place-items: center;
+      font: 700 32px/1 var(--mono);
+      color: #fff;
+    }
+    .user-name {
+      font: 700 22px/1.2 var(--sans);
+      margin: 0 0 4px;
+    }
+    .user-meta {
+      font: 13px/1 var(--sans);
+      color: var(--text-muted);
+    }
+    
+    /* Level & XP */
+    .level-section {
+      padding: 16px 22px;
+    }
+    .level-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font: 700 13px/1 var(--mono);
+    }
+    .xp-text {
+      font: 12px/1 var(--mono);
+      color: var(--text-muted);
+    }
+    .xp-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .xp-bar span {
+      display: block;
+      width: 64%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 16px 22px;
+    }
+    
+    /* Radar Chart */
+    .radar-section {
+      padding: 20px 22px 16px;
+    }
+    .radar-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .radar-chart {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .radar-circles {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    .radar-circles::before,
+    .radar-circles::after {
+      content: '';
+      position: absolute;
+      inset: 20%;
+      border-radius: 50%;
+      border: 1px dashed var(--border);
+    }
+    .radar-circles::after {
+      inset: 40%;
+    }
+    .radar-polygon {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(50% 15%, 85% 35%, 70% 75%, 30% 75%, 15% 35%);
+      background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(139,92,246,0.3));
+    }
+    
+    /* Labels */
+    .radar-labels {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .radar-label {
+      position: absolute;
+      font: 11px/1 var(--mono);
+      color: var(--text-muted);
+      width: 60px;
+      text-align: center;
+    }
+    .radar-label:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); }
+    .radar-label:nth-child(2) { top: 30%; right: 5%; }
+    .radar-label:nth-child(3) { bottom: 20%; right: 10%; }
+    .radar-label:nth-child(4) { bottom: 20%; left: 10%; }
+    .radar-label:nth-child(5) { top: 30%; left: 5%; }
+    .radar-label:nth-child(6) { bottom: 5%; left: 50%; transform: translateX(-50%); }
+    
+    /* Medals */
+    .medals-section {
+      padding: 16px 22px;
+    }
+    .medals-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .medals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .medal-card {
+      aspect-ratio: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+    .medal-card.locked {
+      opacity: 0.3;
+      filter: grayscale(1);
+    }
+    
+    /* Bottom Navigation */
+    .tabbar {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 12px 14px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font: 9px/1 var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .tab .icon {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+    .tab.active { color: var(--primary); }
+    .tab.active .icon { background: var(--primary); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="status">
+        <span>9:41</span>
+        <span class="right">5G • 100%</span>
+      </div>
+      
+      <div class="profile-header">
+        <a href="index.html" class="back-btn">&#8592;</a>
+        <div class="header-title">Perfil</div>
+      </div>
+      
+      <div class="profile-card">
+        <div class="avatar">G</div>
+        <p class="user-name">Gabriel S.</p>
+        <p class="user-meta">Jardim das Amricas | Nvel 4</p>
+      </div>
+      
+      <div class="level-section">
+        <div class="level-row">
+          <span class="level-badge">Posicionamento</span>
+          <span class="xp-text">2.840 / 3.200 XP</span>
+        </div>
+        <div class="xp-bar"><span></span></div>
+      </div>
+      
+      <div class="radar-section">
+        <p class="radar-title">Evolucao</p>
+        <div class="radar-chart">
+          <div class="radar-circles"></div>
+          <div class="radar-polygon"></div>
+          <div class="radar-labels">
+            <div class="radar-label">Disciplina</div>
+            <div class="radar-label">Social</div>
+            <div class="radar-label">Liderana</div>
+            <div class="radar-label">Emocional</div>
+            <div class="radar-label">Participao</div>
+            <div class="radar-label">Impacto</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="medals-section">
+        <p class="medals-title">Medalhas</p>
+        <div class="medals-grid">
+          <div class="medal-card">1</div>
+          <div class="medal-card">2</div>
+          <div class="medal-card">3</div>
+          <div class="medal-card locked"></div>
+          <div class="medal-card locked"></div>
+          <div class="medal-card locked"></div>
+        </div>
+      </div>
+      
+      <div class="tabbar">
+        <a href="index.html" class="tab"><div class="icon">H</div>Inicio</a>
+        <a href="diario.html" class="tab"><div class="icon">D</div>Diario</a>
+        <a href="missoes.html" class="tab"><div class="icon">M</div>Missao</a>
+        <a href="feed.html" class="tab"><div class="icon">F</div>Feed</a>
+        <a href="perfil.html" class="tab active"><div class="icon">P</div>Perfil</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

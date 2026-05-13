@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inconformados - Dirio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-hover: #1F1F1F;
+      --primary: #10B981;
+      --secondary: #8B5CF6;
+      --accent: #F59E0B;
+      --warning: #EF4444;
+      --text: #FAFAFA;
+      --text-muted: #A1A1AA;
+      --border: #27272A;
+      --radius: 16px;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: linear-gradient(180deg, #111 0%, #000 100%);
+      border-radius: 56px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 30px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px 6px;
+      font: 600 14px/1 var(--sans);
+      color: var(--text);
+    }
+    
+    /* Header */
+    .diary-header {
+      padding: 16px 22px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .header-title {
+      font: 700 18px/1 var(--sans);
+    }
+    
+    /* Date Picker */
+    .date-picker {
+      padding: 0 22px 16px;
+    }
+    .date-value {
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font: 600 14px/1 var(--sans);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Tabs */
+    .diary-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 0 14px 16px;
+    }
+    .tab {
+      padding: 12px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      font: 600 11px/1 var(--mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--text-muted);
+    }
+    .tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .tab:hover:not(.active) {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+    
+    /* Tab Content */
+    .tab-content {
+      flex: 1;
+      padding: 0 14px 16px;
+      overflow-y: auto;
+    }
+    
+    .block-section {
+      margin-bottom: 20px;
+    }
+    .block-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .block-title .icon {
+      font-size: 16px;
+    }
+    
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .mood-option {
+      aspect-ratio: 1;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mood-option:hover {
+      transform: scale(1.05);
+    }
+    .mood-option.selected {
+      border-color: var(--primary);
+      background: rgba(16,185,129,0.15);
+    }
+    
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      position: relative;
+    }
+    .check-box.checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .check-box.checked::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      width: 4px;
+      height: 8px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg);
+    }
+    .check-label {
+      flex: 1;
+      font: 500 14px/1 var(--sans);
+    }
+    
+    .reflection-input, .goal-input {
+      width: 100%;
+      min-height: 100px;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      resize: vertical;
+    }
+    .reflection-input:focus, .goal-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .reflection-input::placeholder, .goal-input::placeholder {
+      color: var(--text-muted);
+    }
+    
+    /* Save Button */
+    .save-section {
+      padding: 16px;
+    }
+    .save-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius);
+      color: #fff;
+      font: 700 16px/1 var(--sans);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .save-btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="status">
+        <span>9:41</span>
+        <span class="right">5G • 100%</span>
+      </div>
+      
+      <div class="diary-header">
+        <a href="index.html" class="back-btn">&#8592;</a>
+        <div class="header-title">Dirio do Inconformado</div>
+      </div>
+      
+      <div class="date-picker">
+        <div class="date-value">
+          <span>25 Jan 2025</span>
+        </div>
+      </div>
+      
+      <div class="diary-tabs">
+        <a href="#consciencia" class="tab active">Consciencia</a>
+        <a href="#confronto" class="tab">Confronto</a>
+        <a href="#ajuste" class="tab">Ajuste</a>
+        <a href="#meta" class="tab">Meta</a>
+      </div>
+      
+      <div class="tab-content">
+        <div id="consciencia" class="block-section">
+          <div class="block-title"><span class="icon">C</span> Como estou me sentindo?</div>
+          <div class="mood-grid">
+            <div class="mood-option selected">F</div>
+            <div class="mood-option">T</div>
+            <div class="mood-option">N</div>
+            <div class="mood-option">A</div>
+            <div class="mood-option">S</div>
+          </div>
+        </div>
+        
+        <div id="confronto" class="block-section">
+          <div class="block-title"><span class="icon">K</span> Confronto de Disciplina</div>
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-box checked"></div>
+              <span class="check-label">Acordar cedo (6h)</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box"></div>
+              <span class="check-label">Evitar reclamaes</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box checked"></div>
+              <span class="check-label">Leitura bsica</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box"></div>
+              <span class="check-label">Orar/manha</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box"></div>
+              <span class="check-label">Beber gua (8 copos)</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box checked"></div>
+              <span class="check-label">Exerccios fsicos</span>
+            </div>
+          </div>
+        </div>
+        
+        <div id="ajuste" class="block-section">
+          <div class="block-title"><span class="icon">F</span> Ajuste e Reflexo</div>
+          <textarea class="reflection-input" placeholder="Escreva sobre sua reflexo do dia, o que precisa melhorar, aprendizados...">Hoje consegui manter a disciplina na maioria das tarefas. Precisei melhorar meu controle emocional no trnsito para a escola. Vou trabalhar isso amanh.</textarea>
+        </div>
+        
+        <div id="meta" class="block-section">
+          <div class="block-title"><span class="icon">A</span> Meta para Amanh</div>
+          <textarea class="goal-input" placeholder="Qual sua meta especfica para amanh?">1. Acordar 15 min antes
+2. Completar todas as misses do dia
+3. Ler 20 pginas do livro</textarea>
+        </div>
+      </div>
+      
+      <div class="save-section">
+        <button class="save-btn">+50 XP por completar o dririo</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

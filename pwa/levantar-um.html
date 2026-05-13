@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inconformados - Levantar Um</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-hover: #1F1F1F;
+      --primary: #10B981;
+      --secondary: #8B5CF6;
+      --accent: #F59E0B;
+      --warning: #EF4444;
+      --text: #FAFAFA;
+      --text-muted: #A1A1AA;
+      --border: #27272A;
+      --radius: 16px;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: linear-gradient(180deg, #111 0%, #000 100%);
+      border-radius: 56px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 30px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px 6px;
+      font: 600 14px/1 var(--sans);
+      color: var(--text);
+    }
+    
+    /* Header */
+    .page-header {
+      padding: 16px 22px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .header-title {
+      font: 700 18px/1 var(--sans);
+    }
+    
+    /* Invite Card */
+    .invite-section {
+      padding: 16px 22px;
+    }
+    .invite-title {
+      font: 700 16px/1 var(--sans);
+      margin: 0 0 8px;
+    }
+    .invite-desc {
+      font: 13px/1 var(--sans);
+      color: var(--text-muted);
+      margin: 0 0 16px;
+    }
+    .invite-code-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .invite-code {
+      font: 800 28px/1 var(--mono);
+      letter-spacing: 0.1em;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .invite-label {
+      font: 12px/1 var(--sans);
+      color: rgba(255,255,255,0.8);
+    }
+    .share-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .share-btn {
+      padding: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font: 12px/1 var(--sans);
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    /* Impact Stats */
+    .impact-stats {
+      padding: 0 14px 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .impact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+    }
+    .impact-value {
+      font: 700 28px/1 var(--sans);
+      color: var(--primary);
+      margin: 0 0 4px;
+    }
+    .impact-label {
+      font: 11px/1 var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    
+    /* Passive XP */
+    .passive-section {
+      padding: 0 14px 16px;
+    }
+    .passive-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .passive-card {
+      background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(139,92,246,0.1));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .passive-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .passive-label {
+      font: 14px/1 var(--sans);
+    }
+    .passive-value {
+      font: 700 14px/1 var(--mono);
+      color: var(--primary);
+    }
+    
+    /* Invited List */
+    .invited-section {
+      padding: 0 14px 16px;
+    }
+    .invited-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .invited-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .invited-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .invited-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: grid;
+      place-items: center;
+      font: 700 12px/1 var(--mono);
+      color: #fff;
+    }
+    .invited-info { flex: 1; }
+    .invited-name {
+      font: 600 14px/1 var(--sans);
+      margin: 0 0 2px;
+    }
+    .invited-status {
+      font: 11px/1 var(--sans);
+      color: var(--text-muted);
+    }
+    .invited-badge {
+      font: 10px/1 var(--mono);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .invited-badge.active {
+      background: rgba(16,185,129,0.15);
+      color: var(--primary);
+    }
+    .invited-badge.pending {
+      background: rgba(139,92,246,0.15);
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="status">
+        <span>9:41</span>
+        <span class="right">5G • 100%</span>
+      </div>
+      
+      <div class="page-header">
+        <a href="index.html" class="back-btn">&#8592;</a>
+        <div class="header-title">Levantar Um</div>
+      </div>
+      
+      <div class="invite-section">
+        <p class="invite-title">Convidar um Amigo</p>
+        <p class="invite-desc">Compartilhe seu cdigo e ajude outro jovem a se transformar</p>
+        <div class="invite-code-card">
+          <div class="invite-code">INCONFORMADO2025</div>
+          <div class="invite-label">Cdigo de Convite</div>
+        </div>
+        <div class="share-buttons">
+          <button class="share-btn">WhatsApp</button>
+          <button class="share-btn">Instagram</button>
+          <button class="share-btn">Copiar</button>
+        </div>
+      </div>
+      
+      <div class="impact-stats">
+        <div class="impact-card">
+          <div class="impact-value">5</div>
+          <div class="impact-label">Jovens Impactados</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">3</div>
+          <div class="impact-label">Ativos</div>
+        </div>
+      </div>
+      
+      <div class="passive-section">
+        <p class="passive-title">XP Passivo</p>
+        <div class="passive-card">
+          <div class="passive-row">
+            <span class="passive-label">Ganho por convidado ativo (di)</span>
+            <span class="passive-value">+15 XP</span>
+          </div>
+          <div class="passive-row">
+            <span class="passive-label">Total ganho (7 dias)</span>
+            <span class="passive-value">+75 XP</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="invited-section">
+        <p class="invited-title">Convidados</p>
+        <div class="invited-list">
+          <div class="invited-item">
+            <div class="invited-avatar">L</div>
+            <div class="invited-info">
+              <p class="invited-name">Lucas Mendes</p>
+              <p class="invited-status">Desde 12 Jan</p>
+            </div>
+            <span class="invited-badge active">Ativo</span>
+          </div>
+          <div class="invited-item">
+            <div class="invited-avatar">R</div>
+            <div class="invited-info">
+              <p class="invited-name">Rafaela Lima</p>
+              <p class="invited-status">Desde 20 Jan</p>
+            </div>
+            <span class="invited-badge pending">Pendente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

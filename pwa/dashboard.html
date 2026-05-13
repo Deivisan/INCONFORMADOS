@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inconformados - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-hover: #1F1F1F;
+      --primary: #10B981;
+      --secondary: #8B5CF6;
+      --accent: #F59E0B;
+      --warning: #EF4444;
+      --text: #FAFAFA;
+      --text-muted: #A1A1AA;
+      --border: #27272A;
+      --radius: 16px;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: linear-gradient(180deg, #111 0%, #000 100%);
+      border-radius: 56px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 30px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px 6px;
+      font: 600 14px/1 var(--sans);
+      color: var(--text);
+    }
+    
+    /* Header */
+    .page-header {
+      padding: 16px 22px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .header-title {
+      font: 700 18px/1 var(--sans);
+    }
+    
+    /* Radar Chart */
+    .radar-section {
+      padding: 20px 22px 16px;
+    }
+    .radar-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .radar-chart {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .radar-circles {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    .radar-circles::before,
+    .radar-circles::after {
+      content: '';
+      position: absolute;
+      inset: 25%;
+      border-radius: 50%;
+      border: 1px dashed var(--border);
+    }
+    .radar-circles::after {
+      inset: 45%;
+    }
+    .radar-polygon {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(50% 10%, 85% 30%, 70% 65%, 30% 65%, 15% 30%);
+      background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(139,92,246,0.3));
+    }
+    
+    .radar-labels {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .radar-label {
+      position: absolute;
+      font: 12px/1 var(--mono);
+      color: var(--text-muted);
+      width: 70px;
+      text-align: center;
+    }
+    .radar-label:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+    .radar-label:nth-child(2) { top: 25%; right: 0; }
+    .radar-label:nth-child(3) { bottom: 15%; right: 5%; }
+    .radar-label:nth-child(4) { bottom: 15%; left: 5%; }
+    .radar-label:nth-child(5) { top: 25%; left: 0; }
+    .radar-label:nth-child(6) { bottom: -5%; left: 50%; transform: translateX(-50%); }
+    
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 0 14px 20px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-value {
+      font: 700 28px/1 var(--sans);
+    }
+    .stat-label {
+      font: 11px/1 var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .stat-value.disciplina { color: var(--primary); }
+    .stat-value.social { color: var(--secondary); }
+    .stat-value.emocional { color: var(--accent); }
+    .stat-value.lideranca { color: var(--warning); }
+    
+    /* Insights */
+    .insights-section {
+      padding: 0 14px 16px;
+    }
+    .insights-title {
+      font: 700 13px/1 var(--mono);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .insight-text {
+      font: 13px/1.4 var(--sans);
+      color: var(--text);
+    }
+    .insight-text b { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="status">
+        <span>9:41</span>
+        <span class="right">5G • 100%</span>
+      </div>
+      
+      <div class="page-header">
+        <a href="index.html" class="back-btn">&#8592;</a>
+        <div class="header-title">Dashboard de Evoluo</div>
+      </div>
+      
+      <div class="radar-section">
+        <p class="radar-title">ndice de Evoluo</p>
+        <div class="radar-chart">
+          <div class="radar-circles"></div>
+          <div class="radar-polygon"></div>
+          <div class="radar-labels">
+            <div class="radar-label">Disciplina</div>
+            <div class="radar-label">Social</div>
+            <div class="radar-label">Liderana</div>
+            <div class="radar-label">Emocional</div>
+            <div class="radar-label">Participao</div>
+            <div class="radar-label">Impacto</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value disciplina">85%</div>
+          <div class="stat-label">Disciplina</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value social">72%</div>
+          <div class="stat-label">Social</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value emocional">68%</div>
+          <div class="stat-label">Emocional</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value lideranca">75%</div>
+          <div class="stat-label">Liderana</div>
+        </div>
+      </div>
+      
+      <div class="insights-section">
+        <p class="insights-title">Insights da IA</p>
+        <div class="insight-card">
+          <p class="insight-text">Sua <b>disciplina</b> tem melhorado consistentemente. Continue assim!</p>
+        </div>
+        <div class="insight-card">
+          <p class="insight-text">Já completou <b>85%</b> das missões esta semana. Falta pouco!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inconformados - Comunidades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-hover: #1F1F1F;
+      --primary: #10B981;
+      --secondary: #8B5CF6;
+      --accent: #F59E0B;
+      --warning: #EF4444;
+      --text: #FAFAFA;
+      --text-muted: #A1A1AA;
+      --border: #27272A;
+      --radius: 16px;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 var(--sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: linear-gradient(180deg, #111 0%, #000 100%);
+      border-radius: 56px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 30px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px 6px;
+      font: 600 14px/1 var(--sans);
+      color: var(--text);
+    }
+    
+    /* Header */
+    .page-header {
+      padding: 16px 22px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .header-title {
+      font: 700 18px/1 var(--sans);
+    }
+    
+    /* Communities List */
+    .communities-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .community-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .community-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: grid;
+      place-items: center;
+      font: 700 16px/1 var(--mono);
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .community-info { flex: 1; }
+    .community-name {
+      font: 600 15px/1 var(--sans);
+      margin: 0 0 4px;
+    }
+    .community-meta {
+      font: 12px/1 var(--sans);
+      color: var(--text-muted);
+    }
+    .join-btn {
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font: 600 12px/1 var(--sans);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .join-btn.joined {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="status">
+        <span>9:41</span>
+        <span class="right">5G • 100%</span>
+      </div>
+      
+      <div class="page-header">
+        <a href="feed.html" class="back-btn">&#8592;</a>
+        <div class="header-title">Comunidades</div>
+      </div>
+      
+      <div class="communities-list">
+        <a href="#" class="community-card">
+          <div class="community-avatar">J</div>
+          <div class="community-info">
+            <p class="community-name">Jardim Americas</p>
+            <p class="community-meta">42 membros | 12 online</p>
+          </div>
+          <button class="join-btn joined">Membro</button>
+        </a>
+        <a href="#" class="community-card">
+          <div class="community-avatar">P</div>
+          <div class="community-info">
+            <p class="community-name">Pelourinho Youth</p>
+            <p class="community-meta">38 membros | 8 online</p>
+          </div>
+          <button class="join-btn">Entrar</button>
+        </a>
+        <a href="#" class="community-card">
+          <div class="community-avatar">B</div>
+          <div class="community-info">
+            <p class="community-name">Brotas Connect</p>
+            <p class="community-meta">27 membros | 5 online</p>
+          </div>
+          <button class="join-btn">Entrar</button>
+        </a>
+        <a href="#" class="community-card">
+          <div class="community-avatar">C</div>
+          <div class="community-info">
+            <p class="community-name">Cachoeira do Campo</p>
+            <p class="community-meta">31 membros | 7 online</p>
+          </div>
+          <button class="join-btn">Entrar</button>
+        </a>
+        <a href="#" class="community-card">
+          <div class="community-avatar">V</div>
+          <div class="community-info">
+            <p class="community-name">Vitria da Conquista</p>
+            <p class="community-meta">24 membros | 4 online</p>
+          </div>
+          <button class="join-btn">Entrar</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
